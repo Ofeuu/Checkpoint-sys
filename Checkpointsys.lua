@@ -1,6 +1,6 @@
 local Players = game:GetService("Players")
 local MPS = game:GetService("MarketplaceService")
-local SKIP_CHECKPOINT_ID = 3282768280
+local SKIP_CHECKPOINT_ID = --ID da gamepass
 
 local player = Players.PlayerAdded:Wait()
 local leaderstats = player:WaitForChild("leaderstats")
@@ -20,7 +20,7 @@ for _, checkpoint in pairs(workspace.MAP.CHECKPOINTS:GetChildren()) do
 	end
 end
 
--- Função para teleportar
+-- FunÃ§Ã£o para teleportar
 local function teleport(plr, char)
 	local stage = plr.leaderstats.stage
 	for _, checkpoint in pairs(workspace.MAP.CHECKPOINTS:GetChildren()) do
@@ -46,15 +46,16 @@ MPS.ProcessReceipt = function(receipt)
 	local stage = plr:WaitForChild("leaderstats"):WaitForChild("stage")
 
 	if productId == SKIP_CHECKPOINT_ID then
-		-- Tenta converter o valor do stage para número
+		-- Tenta converter o valor do stage para nÃºmero
 		local currentStageNumber = tonumber(stage.Value)
 		if currentStageNumber then
 			stage.Value = tostring(currentStageNumber + 1)
 			teleport(plr, char)
 		else
-			warn("Stage atual não é número: " .. tostring(stage.Value))
+			warn("Stage atual nÃ£o Ã© nÃºmero: " .. tostring(stage.Value))
 		end
 	end
 
 	return Enum.ProductPurchaseDecision.PurchaseGranted
 end
+
